@@ -29,6 +29,7 @@ public class CrimeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mCrime = new Crime();
+        getActivity().setTitle("Criminal Intent");
     }
 
     @Nullable

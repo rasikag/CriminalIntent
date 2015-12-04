@@ -2,13 +2,14 @@ package com.rasikagayan.android.criminalintent;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.os.Bundle;
 
-public class CrimeActivity extends SingleFragmentActivity {
+/**
+ * Created by Rasika Gayan on 12/3/2015.
+ */
+public class CrimeListActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return new CrimeFragment();
+        return new CrimeListFragment();
     }
 }

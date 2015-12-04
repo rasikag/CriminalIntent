@@ -45,4 +45,9 @@ public class Crime {
     public void setmDate(Date mDate) {
         this.mDate = mDate;
     }
+
+    @Override
+    public String toString() {
+        return getmTitle();
+    }
 }
