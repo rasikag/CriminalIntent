@@ -21,7 +21,7 @@ public class CrimeLab {
         for (int i = 0; i < 100; i++) {
             Crime c = new Crime();
             c.setmTitle("Crime #" + i);
-            c.setmSolved(i % 2 == 0); // Every other one
+            c.setmSolved(i % 2 == 0);
             mCrimes.add(c);
         }
     }

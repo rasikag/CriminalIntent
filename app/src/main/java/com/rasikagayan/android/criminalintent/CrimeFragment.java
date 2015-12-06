@@ -14,11 +14,14 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * Created by Rasika Gayan on 12/3/2015.
  */
 public class CrimeFragment extends Fragment {
+
+    public final static String EXTRA_CRIME_ID = "com.rasikagayan.android.criminalintent.crime_id";
 
     private Crime mCrime;
     private EditText mTitleField;
@@ -30,6 +33,12 @@ public class CrimeFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mCrime = new Crime();
         getActivity().setTitle("Criminal Intent");
+
+        // this is short cut to get extra
+
+        //UUID crimeId = (UUID)getActivity().getIntent().getSerializableExtra(EXTRA_CRIME_ID);
+        UUID crimeId = (UUID)getArguments().getSerializable(EXTRA_CRIME_ID);
+        mCrime = CrimeLab.get(getActivity()).getCrime(crimeId);
     }
 
     @Nullable
@@ -37,6 +46,7 @@ public class CrimeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_crime,container,false);
         mTitleField = (EditText) v.findViewById(R.id.crime_title);
+        mTitleField.setText(mCrime.getmTitle());
 
         mTitleField.addTextChangedListener(new TextWatcher() {
             @Override
@@ -60,6 +70,7 @@ public class CrimeFragment extends Fragment {
         mDateButton.setEnabled(false);
 
         mSolvedCheckBox = (CheckBox) v.findViewById(R.id.crime_solved);
+        mSolvedCheckBox.setChecked(mCrime.ismSolved());
         mSolvedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -69,6 +80,16 @@ public class CrimeFragment extends Fragment {
 
         return v;
 
+    }
+
+    public static CrimeFragment newInstance(UUID crimeID){
+
+        Bundle args = new Bundle();
+        args.putSerializable(EXTRA_CRIME_ID, crimeID);
+        CrimeFragment crimeFragment = new CrimeFragment();
+        crimeFragment.setArguments(args);
+
+        return crimeFragment;
     }
 
 

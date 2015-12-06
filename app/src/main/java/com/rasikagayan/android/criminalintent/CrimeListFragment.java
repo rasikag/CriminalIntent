@@ -1,6 +1,7 @@
 package com.rasikagayan.android.criminalintent;
 
 import android.app.ListFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -36,9 +37,19 @@ public class CrimeListFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         Crime c = ((CrimeAdapter) getListAdapter()).getItem(position);
-        Log.d(TAG, c.getmTitle() + " was clicked");
+        Intent intent = new Intent(getActivity(),CrimeActivity.class);
+        intent.putExtra(CrimeFragment.EXTRA_CRIME_ID,c.getmId());
+        startActivity(intent);
     }
 
+    // reload the list
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((CrimeAdapter)getListAdapter()).notifyDataSetChanged();
+    }
 
     private class CrimeAdapter extends ArrayAdapter<Crime> {
 
