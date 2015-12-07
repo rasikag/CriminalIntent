@@ -7,6 +7,8 @@ import android.os.Bundle;
 
 import java.util.UUID;
 
+// now we not use this activity
+
 public class CrimeActivity extends SingleFragmentActivity {
 
     @Override
