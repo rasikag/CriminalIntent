@@ -1,7 +1,6 @@
 package com.rasikagayan.android.criminalintent;
 
-import android.app.Activity;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 
 /**
  * Created by Rasika Gayan on 12/3/2015.

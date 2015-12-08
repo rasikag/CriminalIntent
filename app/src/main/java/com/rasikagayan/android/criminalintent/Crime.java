@@ -10,44 +10,44 @@ public class Crime {
 
     private UUID mId;
     private String mTitle;
-    private boolean mSolved;
     private Date mDate;
+    private boolean mSolved;
 
-    public Crime(){
+    public Crime() {
         mId = UUID.randomUUID();
         mDate = new Date();
     }
 
-    public UUID getmId() {
-        return mId;
-    }
-
-    public String getmTitle() {
+    @Override
+    public String toString() {
         return mTitle;
     }
 
-    public void setmTitle(String mTitle) {
-        this.mTitle = mTitle;
+    public String getTitle() {
+        return mTitle;
     }
 
-    public boolean ismSolved() {
+    public void setTitle(String title) {
+        mTitle = title;
+    }
+
+    public UUID getId() {
+        return mId;
+    }
+
+    public boolean isSolved() {
         return mSolved;
     }
 
-    public void setmSolved(boolean mSolved) {
-        this.mSolved = mSolved;
+    public void setSolved(boolean solved) {
+        mSolved = solved;
     }
 
-    public Date getmDate() {
+    public Date getDate() {
         return mDate;
     }
 
-    public void setmDate(Date mDate) {
-        this.mDate = mDate;
-    }
-
-    @Override
-    public String toString() {
-        return getmTitle();
+    public void setDate(Date date) {
+        mDate = date;
     }
 }
