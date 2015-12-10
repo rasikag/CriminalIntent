@@ -1,14 +1,16 @@
 package com.rasikagayan.android.criminalintent;
 
 import android.os.Bundle;
-
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
+
 /**
  * Created by Rasika Gayan on 12/3/2015.
  */
-public abstract class SingleFragmentActivity extends FragmentActivity {
+
+// universal fragment activity
+public abstract class SingleFragmentActivity extends AppCompatActivity {
 
     protected abstract Fragment createFragment();
 
