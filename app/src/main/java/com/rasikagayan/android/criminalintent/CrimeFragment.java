@@ -21,11 +21,7 @@ import android.widget.EditText;
 import java.util.Date;
 import java.util.UUID;
 
-//import android.app.FragmentManager;
 
-/**
- * Created by Rasika Gayan on 12/3/2015.
- */
 public class CrimeFragment extends Fragment {
 
     public static final String EXTRA_CRIME_ID = "criminalintent.CRIME_ID";
@@ -142,4 +138,11 @@ public class CrimeFragment extends Fragment {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        CrimeLab.get(getActivity()).saveCrimes();
+    }
+
 }
