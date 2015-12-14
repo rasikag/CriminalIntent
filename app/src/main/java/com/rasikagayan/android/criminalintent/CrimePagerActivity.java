@@ -16,7 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 /**
  * Created by Rasika Gayan on 12/6/2015.
  */
-public class CrimePagerActivity extends AppCompatActivity {
+public class CrimePagerActivity extends AppCompatActivity implements CrimeFragment.Callbacks {
 
     ViewPager mViewPager;
 
@@ -53,5 +53,8 @@ public class CrimePagerActivity extends AppCompatActivity {
     }
 
 
-
+    @Override
+    public void onCrimeUpdate(Crime crime) {
+        
+    }
 }

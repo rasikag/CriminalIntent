@@ -51,6 +51,7 @@ public class CrimeFragment extends Fragment {
     private ImageView mPhotoView;
     //private Button mReportButton;
     private Button mSuspectButton;
+    private CrimeFragment.Callbacks mCallbacks;
 
     Crime mCrime;
     EditText mTitleField;
@@ -92,6 +93,8 @@ public class CrimeFragment extends Fragment {
         mTitleField.addTextChangedListener(new TextWatcher() {
             public void onTextChanged(CharSequence c, int start, int before, int count) {
                 mCrime.setTitle(c.toString());
+                mCallbacks.onCrimeUpdate(mCrime);
+                getActivity().setTitle(mCrime.getTitle());
             }
 
             public void beforeTextChanged(CharSequence c, int start, int count, int after) {
@@ -142,6 +145,7 @@ public class CrimeFragment extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // set the crime's solved property
                 mCrime.setSolved(isChecked);
+                mCallbacks.onCrimeUpdate(mCrime);
             }
         });
 
@@ -204,6 +208,8 @@ public class CrimeFragment extends Fragment {
         if (requestCode == REQUEST_DATE) {
             Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             mCrime.setDate(date);
+            // updated for the tablet
+            mCallbacks.onCrimeUpdate(mCrime);
             updateDate();
         } else if (requestCode == REQUEST_PHOTO) {
             // when we getting data we have to submit with putExtra method's code also
@@ -212,6 +218,8 @@ public class CrimeFragment extends Fragment {
                 //Log.d(TAG, "filename: " + fileName);
                 Photo p = new Photo(fileName);
                 mCrime.setPhoto(p);
+                // updated for the tablet view
+                mCallbacks.onCrimeUpdate(mCrime);
                 showPhoto();
                 //Log.i(TAG, "Crime: " + mCrime.getTitle() + " has a photo");
             }
@@ -234,6 +242,8 @@ public class CrimeFragment extends Fragment {
             c.moveToFirst();
             String suspect = c.getString(0);
             mCrime.setSuspect(suspect);
+            // updated for the tablet view
+            mCallbacks.onCrimeUpdate(mCrime);
             mSuspectButton.setText(suspect);
             c.close();
         }
@@ -296,7 +306,6 @@ public class CrimeFragment extends Fragment {
         return report;
     }
 
-
     // why this is in onStart
     @Override
     public void onStart() {
@@ -308,5 +317,21 @@ public class CrimeFragment extends Fragment {
     public void onStop() {
         super.onStop();
         PictureUtils.cleanImageView(mPhotoView);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mCallbacks = (Callbacks) activity;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mCallbacks = null;
+    }
+
+    public interface Callbacks{
+        void onCrimeUpdate(Crime crime);
     }
 }
